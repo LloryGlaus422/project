@@ -16,6 +16,11 @@ var Shop = new Schema({
     min: 1,
     required: true
   },
+  price: {
+    type: Number,
+    min: 1,
+    required: true
+  },
   priority: {
     type: Number,
     min: 1,

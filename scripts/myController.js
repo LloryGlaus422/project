@@ -5,6 +5,7 @@ module.exports.create = (req, res) => {
     const newItem = new Item({
         item: req.body.item,
         quantity: req.body.quantity,
+        price: req.body.price,
         priority: req.body.priority
     });
 
@@ -58,6 +59,7 @@ exports.update = (req, res, id) => {
     Item.findByIdAndUpdate(id, {
         item: req.body.item,
         quantity: req.body.quantity,
+        price: req.body.price,
         priority: req.body.priority
     }, { new: true })
         .then(items => {

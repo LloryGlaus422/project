@@ -43,6 +43,16 @@ app.get('/item/retrieve/:id', function (req,res) {
   item.findOne(req,res,id);
 })
 
+app.put('/item/update/:id',function (req,res) {
+  let id = req.params.id;
+  item.update(req,res,id);
+})
+
+
+app.delete('/item/delete/:id', function (req,res) {
+  let id = req.params.id;
+  item.delete(req,res,id);
+})
 
 app.listen(port, () => {
   console.log("Server is listening on port " + port);

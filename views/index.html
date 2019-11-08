@@ -28,7 +28,6 @@
         background: url("https://img.freepik.com/free-vector/blue-light-sparkles-background-with-copyspace_1017-20091.jpg?size=626&ext=jpg");
         background-size: cover;
         background-repeat: no-repeat;
-        opacity: 20%;
     }
 
     #header {
@@ -43,7 +42,7 @@
         margin-left: 80px;
         margin-top: 15%;
         padding: 4%;
-        background-color: antiquewhite;
+        background-color: blueviolet;
         border: 4px;
         width: 50%;
     }
@@ -101,6 +100,12 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="qtyLabel">Price:</label>
+                            <input type="number" class="form-control" name="price" placeholder="Enter Price" min=0
+                                step="1" required />
+                        </div>
+
+                        <div class="form-group">
                             <label for="priLabel">Priority:</label>
                             <input type="number" class="form-control" name="priority" placeholder="Enter Priority"
                                 min="1" max="3" required />
@@ -116,7 +121,7 @@
         </center>
 
 
-        <div style="display:none;width : 400px; height:400px;margin-left: 450px; background-color: antiquewhite;"
+        <div style="display:none;width : 400px; height:500px;margin-left: 450px; background-color: antiquewhite;"
             id="updateForm">
             <div class="card-header text-black" style="text-align: center;">Update Item</div>
             <div class="card-body text-center">
@@ -125,6 +130,8 @@
                         required=""><br>
                     <input type="number" class="form-control" name="quantityUpdate" placeholder="Quantity" value="0"
                         min=0 required=""><br>
+                    <input type="number" class="form-control" name="priceUpdate" placeholder="Price" value="0" min=0
+                        required=""><br>
                     <input type="number" class="form-control" name="priorityUpdate" placeholder="Priority" value="0"
                         min="1" max="3" required="">
                 </form>
@@ -148,6 +155,7 @@
                     <thead class="thead thead-light">
                         <th>Item</th>
                         <th>Quantity</th>
+                        <th>Price</th>
                         <th>Priority</th>
                         <th>Action</th>
                     </thead>
@@ -189,8 +197,6 @@
                 e.preventDefault();
                 $("#showForm").show();
                 $("#showTable").hide();
-
-
             })
 
             $("#cancel").on('click', function (e) {
@@ -199,6 +205,7 @@
                 $("#showTable").show();
                 let item = $('input[name="item"]').val('');
                 let quantity = $('input[name="quantity"]').val('');
+                let price = $('input[name="price"]').val('');
                 let priority = $('input[name="priority"]').val('');
             })
 
@@ -208,12 +215,16 @@
                 $("#showTable").show();
             })
 
+          
             function addRow(data) {
+                
                 var tr = $("<tr>", {
                     id: data._id,
                     item: data.item,
                     quantity: data.quantity,
+                    price: (data.price*data.quantity),
                     priority: data.priority
+
                 });
                 var btns = $("<div>").append($("<button>", {
                     class: "btn btn-warning edit"
@@ -225,6 +236,7 @@
                 $(tr).append(
                     $("<td>").text(data.item),
                     $("<td>").text(data.quantity),
+                    $("<td>").text(data.price*data.quantity),
                     $("<td>").text(data.priority),
                     $("<td>").append(btns)
                 ).appendTo($('tbody'));
@@ -236,6 +248,7 @@
                 var boolean = true;
                 var item = $('input[name="item"]');
                 var quantity = $('input[name="quantity"]');
+                var price = $('input[name="price"]');
                 var priority = $('input[name="priority"]');
 
 
@@ -254,6 +267,7 @@
                         data: {
                             item: item.val(),
                             quantity: quantity.val(),
+                            price: price.val(),
                             priority: priority.val()
                         },
                         success: function (data) {
@@ -278,6 +292,7 @@
                     })
                     item.val('');
                     quantity.val('');
+                    price.val('');
                     priority.val('');
                     $("#showForm").hide();
                     $("#showTable").show();
@@ -339,6 +354,7 @@
             function updateItem(id) {
                 var item = $('input[name="itemUpdate"]');
                 var quantity = $('input[name="quantityUpdate"]');
+                var price = $('input[name="priceUpdate"]');
                 var priority = $('input[name="priorityUpdate"]');
                 $.ajax({
                     url: "item/update/" + id + "",
@@ -347,6 +363,7 @@
                     data: {
                         item: item.val(),
                         quantity: quantity.val(),
+                        price: price.val(),
                         priority: priority.val()
                     },
                     success: function (data) {
@@ -374,6 +391,7 @@
                     success: function (data) {
                         $('input[name="itemUpdate"]').val(data.item);
                         $('input[name="quantityUpdate"]').val(data.quantity);
+                        $('input[name="priceUpdate"]').val(data.price);
                         $('input[name="priorityUpdate"]').val(data.priority);
                     },
                     error: function (e) {
