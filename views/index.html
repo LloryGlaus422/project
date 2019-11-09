@@ -42,14 +42,14 @@
         margin-left: 80px;
         margin-top: 15%;
         padding: 4%;
-        background-color: blueviolet;
+        background-color:  #b3d9ff;
         border: 4px;
         width: 50%;
     }
 
     #add {
         margin-left: 8%;
-        width: 30%;
+        width: 20%;
         font: 40px;
         height: 50px;
         font-size: 20px;
@@ -76,16 +76,17 @@
 
 <body>
     <div id="header" class="card">
-        <h2>Create Items Here</h2><br>
+        <h2>Enrich your shopping list wisely.
+            </h2><br>
         <button id="createBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
-            data-target="#myModal">Create
-            Item</button>
+            data-target="#myModal">Start</button>
     </div>
 
     <div id="form">
         <center>
+            
             <div class="card" id="showForm" style="display:none;width : 400px;">
-                <h3 class="card-header">Add New Item</h3>
+                    <center> <h3 class="card-header">Add New Item</h3></center>
                 <div>
                     <form action="" class="form was-validated">
                         <div class="form-group">
@@ -141,13 +142,21 @@
                 <button id="updateCancel" class="btn btn-danger">CANCEL</button>
             </div>
         </div>
+        <div class="card" style="width: 18rem;margin-top: 2%;">
+                <img style = "width: 30px;height: 25%;margin-left:40%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Total Amount:    <span id = "amount">0</span></h5>
+                  <p class="card-text"></p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
 
         <div class="container" style="display:inline;">
             <div id="showTable">
                 <br><br>
                 <center>
-                    <button id="add" class="btn btn-info" data-toggle="modal" data-target="#myModal">ADD
-                        ITEM</button>
+                    <button id="add" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add
+                        Items</button>
                     <br><br>
                 </center>
 
@@ -233,6 +242,8 @@
                         class: "btn btn-secondary delete",
                     }).text("Delete")
                 )
+
+
                 $(tr).append(
                     $("<td>").text(data.item),
                     $("<td>").text(data.quantity),
@@ -240,6 +251,11 @@
                     $("<td>").text(data.priority),
                     $("<td>").append(btns)
                 ).appendTo($('tbody'));
+
+                var a = $("#amount").text();
+                
+                $("#amount").text(parseFloat(a)+parseFloat(data.price*data.quantity))
+               
             }
 
 
