@@ -23,7 +23,6 @@
 <style>
     body {
         font-size: 20px;
-        ;
         color: #1E2835;
         background: url("https://img.freepik.com/free-vector/blue-light-sparkles-background-with-copyspace_1017-20091.jpg?size=626&ext=jpg");
         background-size: cover;
@@ -48,7 +47,6 @@
     }
 
     #add {
-        margin-left: 8%;
         width: 20%;
         font: 40px;
         height: 50px;
@@ -78,7 +76,8 @@
     <div id="header" class="card">
         <h2>Enrich your shopping list wisely.
         </h2><br>
-        <button id="createBtn" type="button" class="btn btn-info btn-lg">Start</button>
+        <button id="createBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
+            data-target="#myModal">Start</button>
     </div>
 
     <div id="form">
@@ -143,89 +142,80 @@
                 <button id="updateCancel" class="btn btn-danger">CANCEL</button>
             </div>
         </div>
+        <div id="row" class="row">
+            <div id="price" class="card" style="width: 18rem;margin-top: 2%;margin-left: 20%"">
+            <img style=" width: 30px;height: 25%;margin-left:40%;"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s"
+                class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Total Amount: <span id="amount">0</span></h5>
+                    <p class="card-text"></p>
+                    <div class="container">
+                        <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my">
+                            Open Checker
+                        </button>
 
-        <div id = "row" class="row" style="margin-left: 5%;margin-top: 5%;">
-                <div class="col-sm-3">
-                    <div class="card">
-                        <div id="price" class="card-body">
-                            <img style="width: 30px;height: 20%;margin-left:40%;"
-                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s"
-                                class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Expenses: <span id="amount">0</span></h5>
-                                <p class="card-text"></p>
-                                <div class="container">
-                                    <!-- Button to Open the Modal -->
-                                    <button id = "val" type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#my">
-                                        Pocket Money
-                                    </button>
-    
-                                    <div class="modal" id="my">
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                          
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                              <h4 class="modal-title">Modal Heading</h4>
-                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            </div>
-                                            
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                      <span class="input-group-text">$</span>
-                                                    </div>
-                                                    <input type="number" class="form-control" name="priceUpdate" placeholder="Pocket Amount" ><br>
-                                                  </div>
-                                            </div>
-                                            
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                              <button id= "check" type="button" class="btn btn-danger" data-dismiss="modal">Check</button>
-                                            </div>
-                                            
-                                          </div>
-                                        </div>
-                                      </div>
-                                      
+                        <!-- The Modal -->
+                        <div class="modal" id="my">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Check your Balance</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <input type="text" class="form-control" id="pocket" name="amount"
+                                            placeholder="Amount" value="0" autofocus><br>
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button id="check" type="button" class="btn btn-danger"
+                                            data-dismiss="modal">Check</button>
+                                    </div>
+
                                 </div>
-    
                             </div>
                         </div>
-                    </div>
-                </div>
-    
-    
-                <div class="col-sm-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Balance</h5>
-                            <p>Amount: <span id="balance" class="card-text">0</span></p>
-                            <a href="#" class="btn btn-primary">Your Total Balance</a>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-sm-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Find!</h5>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="search" placeholder="Search">
-                            </div>
-                            <a href="#" class="btn btn-primary">Search</a>
-                        </div>
+
                     </div>
                 </div>
             </div>
-    
-    
+            <div id="price" class="card" style="width: 18rem;margin-top: 2%;margin-left: 20%"">
+            <img style=" width: 30px;height: 25%;margin-left:40%;"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s"
+                class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Balance: <span id="balance">0</span></h5>
+                    <p class="card-text"></p>
+                    <a style="color:white" class="btn btn-primary">Your Remaining Balance</a>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <center>
+            <div class="col-sm-5">
+                <div id="Ser" class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Find!</h5>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Search"
+                                value=" " autofocus>
+                        </div>
+                        <a id="btnSearch" class="btn btn-primary">Search</a>
+                    </div>
+                </div>
+            </div>
+        </center>
 
         <div class="container" style="display:inline;">
             <div id="showTable">
-                <br><br>
+                <br>
                 <center>
                     <button id="add" class="btn btn-info" data-toggle="modal" data-target="#myModal">Add
                         Items</button>
@@ -267,256 +257,273 @@
                 })
             }
 
-            var total = [];
+            $("#btnSearch").click(function () {
+                let search = $("#search").val().toLowerCase();
+                $("tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(search) > -1)
+                });
+            });
+                var total = [];
 
-            retrieveAllData();
+                retrieveAllData();
 
-            // $("#check").click(function(e){
-            //    let a = $("#pocket").val();
-            //    let c = $("#amount").text();
-            //    let b = (parseInt(c)-parseInt)
-            //    $()
-            // })
+                $("#check").click(function (e) {
+                    let a = $("#pocket").val();
+                    let c = $("#amount").text();
+                    let b = (parseInt(a) - parseInt(c))
+                    $("#balance").text(b);
+                })
 
-            $("#createBtn").click(function (e) {
-                $("#form").show();
-                $('#header').hide();
-                $("#price").show();
-            })
+                $("#createBtn").click(function (e) {
+                    $("#form").show();
+                    $('#header').hide();
+                })
 
-            $("#add").click(function (e) {
-                e.preventDefault();
-                $("#showForm").show();
-                $("#price").hide();
-                $("#showTable").hide();
-            })
-
-            $("#cancel").on('click', function (e) {
-                e.preventDefault();
-                $("#showForm").hide();
-                $("#showTable").show();
-                $("#price").show();
-                let item = $('input[name="item"]').val('');
-                let quantity = $('input[name="quantity"]').val('');
-                let price = $('input[name="price"]').val('');
-                let priority = $('input[name="priority"]').val('');
-            })
-
-            $("#updateCancel").on('click', function (e) {
-                e.preventDefault();
-                $("#updateForm").hide();
-                $("#showTable").show();
-                $("#price").show();
-
-            })
+                $("#add").click(function (e) {
+                    e.preventDefault();
+                    $("#showForm").show();
+                    $("#showTable").hide();
+                    $("#row").hide();
+                    $("#Ser").hide();
 
 
-            function addRow(data) {
+                })
 
-                var tr = $("<tr>"
-                    , {
-                        id: data._id,
-                        item: data.item,
-                        quantity: data.quantity,
-                        price: (data.price * data.quantity),
-                        priority: data.priority
+                $("#cancel").on('click', function (e) {
+                    e.preventDefault();
+                    $("#showForm").hide();
+                    $("#showTable").show();
+                    $("#row").show();
+                    $("#Ser").show();
+                    let item = $('input[name="item"]').val('');
+                    let quantity = $('input[name="quantity"]').val('');
+                    let price = $('input[name="price"]').val('');
+                    let priority = $('input[name="priority"]').val('');
+                })
 
-                    }
-                );
-                var btns = $("<div>").append($("<button>", {
-                    class: "btn btn-warning edit"
-                }).text("Edit"),
-                    $("<button>", {
-                        class: "btn btn-secondary delete"
-                    }).text("Delete")
-                )
+                $("#updateCancel").on('click', function (e) {
+                    e.preventDefault();
+                    $("#updateForm").hide();
+                    $("#showTable").show();
+                    $("#row").show();
+                    $("#Ser").show();
 
-
-                $(tr).append(
-                    $("<td>").text(data.item),
-                    $("<td>").text(data.quantity),
-                    $("<td>", { id: "pid" }).text(data.price * data.quantity),
-                    $("<td>").text(data.priority),
-                    $("<td>").append(btns)
-                ).appendTo($('tbody'));
-
-                total.push(data.price * data.quantity)
-
-                var sum = 0;
-                for (var i in total) { sum += total[i]; }
-                var a = $("#amount").text(sum);
-
-
-            }
-
-
-            $("#addItem").on('click', function (e) {
-                $("#price").show();
-                e.preventDefault(e);
-                var boolean = true;
-                var item = $('input[name="item"]');
-                var quantity = $('input[name="quantity"]');
-                var price = $('input[name="price"]');
-                var priority = $('input[name="priority"]');
-
-
-                $('input').each(function () {
-                    if ($(this).val() == "") {
-                        boolean = false;
-                    }
                 })
 
 
-                if (boolean == true) {
+                function addRow(data) {
+
+                    var tr = $("<tr>"
+                        , {
+                            id: data._id,
+                            item: data.item,
+                            quantity: data.quantity,
+                            price: (data.price * data.quantity),
+                            priority: data.priority
+
+                        }
+                    );
+                    var btns = $("<div>").append($("<button>", {
+                        class: "btn btn-warning edit"
+                    }).text("Edit"),
+                        $("<button>", {
+                            class: "btn btn-secondary delete"
+                        }).text("Delete")
+                    )
+
+
+                    $(tr).append(
+                        $("<td>").text(data.item),
+                        $("<td>").text(data.quantity),
+                        $("<td>", { id: "pid" }).text(data.price * data.quantity),
+                        $("<td>").text(data.priority),
+                        $("<td>").append(btns)
+                    ).appendTo($('tbody'));
+
+                    total.push(data.price * data.quantity)
+
+                    var sum = 0;
+                    for (var i in total) { sum += total[i]; }
+                    var a = $("#amount").text(sum);
+
+
+                }
+
+
+                $("#addItem").on('click', function (e) {
+                    $("#row").show();
+                    $("#Ser").show();
+                    e.preventDefault(e);
+                    var boolean = true;
+                    var item = $('input[name="item"]');
+                    var quantity = $('input[name="quantity"]');
+                    var price = $('input[name="price"]');
+                    var priority = $('input[name="priority"]');
+
+
+                    $('input').each(function () {
+                        if ($(this).val() == "") {
+                            boolean = false;
+                        }
+                    })
+
+
+                    if (boolean == true) {
+                        $.ajax({
+                            url: "item/create",
+                            crossDomain: true,
+                            type: "POST",
+                            data: {
+                                item: item.val(),
+                                quantity: quantity.val(),
+                                price: price.val(),
+                                priority: priority.val()
+                            },
+                            success: function (data) {
+                                $("#showTable").show();
+                                $("#row").show();
+                                $("#Ser").show();
+
+                                addRow(data);
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Success!',
+                                    text: "Successfully added to database!",
+                                    confirmButtonColor: '#3297a',
+                                })
+                            },
+                            error: function (e) {
+                                console.log(e);
+                                $("#showForm").show();
+                                $("#showTable").hide();
+                                $("#row").hide();
+                                Swal.fire({
+                                    type: 'error',
+                                    title: 'Oops...',
+                                    text: 'Item already exists in the list!',
+                                })
+                            }
+                        })
+                        item.val('');
+                        quantity.val('');
+                        price.val('');
+                        priority.val('');
+                        $("#showForm").hide();
+                        $("#showTable").show();
+                        $("#row").hide();
+                        $("#Ser").hide();
+
+                    }
+                    else {
+                        $("#row").hide();
+                        $("#Ser").hide();
+                        Swal.fire({
+                            type: 'error',
+                            title: 'Oops...',
+                            text: 'Please fill all the fields!',
+                        })
+                    }
+
+                });
+
+
+                $(document).on("click", ".delete", function () {
+                    $(this).parent().parent().parent().fadeOut();
+
+                    let deleteprice = $(this).parent().parent().parent().attr("price")
+                    let current = $('#amount').text();
+                    var sum = $("#amount").text(parseInt(current) - parseInt(deleteprice));
+                    deleteItem($(this).parent().parent().parent().attr("id"));
+
+                })
+
+                function deleteItem(id) {
                     $.ajax({
-                        url: "item/create",
+                        url: "item/delete/" + id + "",
                         crossDomain: true,
-                        type: "POST",
+                        type: "DELETE",
+                        success: function (data) {
+                            Swal.fire({
+                                type: 'warning',
+                                title: 'Warning!',
+                                text: "An item has been deleted.",
+                                confirmButtonColor: '#3085d6',
+                            })
+
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    })
+                }
+
+                var updateId;
+                $(document).on("click", ".edit", function () {
+                    status = false;
+                    console.log(retrieveOneItem($(this).parent().parent().parent().attr("id")));
+                    updateId = $(this).parent().parent().parent().attr("id");
+                    $("#updateForm").show();
+                    $("#showTable").hide();
+                    $("#row").hide();
+                    $("#Ser").show();
+                })
+
+                $(document).on("click", "#updateItem", function () {
+                    updateItem(updateId);
+                    retrieveAllData();
+                    $("#updateForm").hide();
+                    $("#showTable").show();
+                    $("#row").show();
+                    $("#Ser").show();
+                })
+
+
+                function updateItem(id) {
+                    var item = $('input[name="itemUpdate"]');
+                    var quantity = $('input[name="quantityUpdate"]');
+                    var price = $('input[name="priceUpdate"]');
+                    var priority = $('input[name="priorityUpdate"]');
+                    $.ajax({
+                        url: "item/update/" + id + "",
+                        crossDomain: true,
+                        type: "PUT",
                         data: {
                             item: item.val(),
                             quantity: quantity.val(),
                             price: price.val(),
-                            priority: priority.val()
+                            priority: priority.val(),
                         },
                         success: function (data) {
-                            addRow(data);
-                            Swal.fire({
-                                type: 'success',
-                                title: 'Success!',
-                                text: "Successfully added to database!",
-                                confirmButtonColor: '#3297a',
-                            })
                         },
                         error: function (e) {
                             console.log(e);
-                            $("#showForm").show();
-                            $("#showTable").hide();
                             Swal.fire({
                                 type: 'error',
                                 title: 'Oops...',
-                                text: 'Item already exists in the list!',
+                                text: 'Item already exists!',
                             })
+
                         }
                     })
-                    item.val('');
-                    quantity.val('');
-                    price.val('');
-                    priority.val('');
-                    $("#showForm").hide();
-                    $("#showTable").show();
                 }
-                else {
-                    Swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'Please fill all the fields!',
+
+                function retrieveOneItem(id) {
+                    $.ajax({
+                        url: "item/retrieve/" + id + "",
+                        crossDomain: true,
+                        type: "GET",
+                        success: function (data) {
+                            $('input[name="itemUpdate"]').val(data.item);
+                            $('input[name="quantityUpdate"]').val(data.quantity);
+                            $('input[name="priceUpdate"]').val(data.price);
+                            $('input[name="priorityUpdate"]').val(data.priority);
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
                     })
                 }
-
             });
-
-
-            $(document).on("click", ".delete", function () {
-                $(this).parent().parent().parent().fadeOut();
-
-                let deleteprice = $(this).parent().parent().parent().attr("price")
-                let current = $('#amount').text();
-                var sum = $("#amount").text(parseInt(current) - parseInt(deleteprice));
-                deleteItem($(this).parent().parent().parent().attr("id"));
-
-            })
-
-            function deleteItem(id) {
-                $.ajax({
-                    url: "item/delete/" + id + "",
-                    crossDomain: true,
-                    type: "DELETE",
-                    success: function (data) {
-                        Swal.fire({
-                            type: 'warning',
-                            title: 'Warning!',
-                            text: "An item has been deleted.",
-                            confirmButtonColor: '#3085d6',
-                        })
-
-                    },
-                    error: function (e) {
-                        console.log(e);
-                    }
-                })
-            }
-
-            var updateId;
-            $(document).on("click", ".edit", function () {
-                status = false;
-                console.log(retrieveOneItem($(this).parent().parent().parent().attr("id")));
-                updateId = $(this).parent().parent().parent().attr("id");
-                $("#updateForm").show();
-                $("#showTable").hide();
-                $("#price").hide();
-
-
-            })
-            $(document).on("click", "#updateItem", function () {
-                updateItem(updateId);
-                retrieveAllData();
-                $("#updateForm").hide();
-                $("#showTable").show();
-                $("#price").show();
-
-            })
-
-
-            function updateItem(id) {
-                var item = $('input[name="itemUpdate"]');
-                var quantity = $('input[name="quantityUpdate"]');
-                var price = $('input[name="priceUpdate"]');
-                var priority = $('input[name="priorityUpdate"]');
-                $.ajax({
-                    url: "item/update/" + id + "",
-                    crossDomain: true,
-                    type: "PUT",
-                    data: {
-                        item: item.val(),
-                        quantity: quantity.val(),
-                        price: price.val(),
-                        priority: priority.val(),
-                    },
-                    success: function (data) {
-                        // console.log(data);
-                        var a = $('#amount').text()
-                        alert(a);
-
-                    },
-                    error: function (e) {
-                        console.log(e);
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Oops...',
-                            text: 'Item already exists!',
-                        })
-
-                    }
-                })
-            }
-
-            function retrieveOneItem(id) {
-                $.ajax({
-                    url: "item/retrieve/" + id + "",
-                    crossDomain: true,
-                    type: "GET",
-                    success: function (data) {
-                        $('input[name="itemUpdate"]').val(data.item);
-                        $('input[name="quantityUpdate"]').val(data.quantity);
-                        $('input[name="priceUpdate"]').val(data.price);
-                        $('input[name="priorityUpdate"]').val(data.priority);
-                    },
-                    error: function (e) {
-                        console.log(e);
-                    }
-                })
-            }
-        });
     </script>
 </body>
 
