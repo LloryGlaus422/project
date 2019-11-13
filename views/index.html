@@ -72,20 +72,13 @@
         width: 60%;
         color: black;
     }
-
-    #price{
-        display:none
-    }
-
-
 </style>
 
 <body>
     <div id="header" class="card">
         <h2>Enrich your shopping list wisely.
         </h2><br>
-        <button id="createBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
-            data-target="#myModal">Start</button>
+        <button id="createBtn" type="button" class="btn btn-info btn-lg">Start</button>
     </div>
 
     <div id="form">
@@ -150,16 +143,85 @@
                 <button id="updateCancel" class="btn btn-danger">CANCEL</button>
             </div>
         </div>
-        <div id="price" class="card" style="width: 18rem;margin-top: 2%;">
-            <img style="width: 30px;height: 25%;margin-left:40%;"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s"
-                class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Total Amount: <span id="amount">0</span></h5>
-                <p class="card-text"></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+
+        <div id = "row" class="row" style="margin-left: 5%;margin-top: 5%;">
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div id="price" class="card-body">
+                            <img style="width: 30px;height: 20%;margin-left:40%;"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Expenses: <span id="amount">0</span></h5>
+                                <p class="card-text"></p>
+                                <div class="container">
+                                    <!-- Button to Open the Modal -->
+                                    <button id = "val" type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#my">
+                                        Pocket Money
+                                    </button>
+    
+                                    <div class="modal" id="my">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                          
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                              <h4 class="modal-title">Modal Heading</h4>
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                      <span class="input-group-text">$</span>
+                                                    </div>
+                                                    <input type="number" class="form-control" name="priceUpdate" placeholder="Pocket Amount" ><br>
+                                                  </div>
+                                            </div>
+                                            
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                              <button id= "check" type="button" class="btn btn-danger" data-dismiss="modal">Check</button>
+                                            </div>
+                                            
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                                </div>
+    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+    
+                <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Balance</h5>
+                            <p>Amount: <span id="balance" class="card-text">0</span></p>
+                            <a href="#" class="btn btn-primary">Your Total Balance</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-sm-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Find!</h5>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="search" placeholder="Search">
+                            </div>
+                            <a href="#" class="btn btn-primary">Search</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+    
+    
 
         <div class="container" style="display:inline;">
             <div id="showTable">
@@ -208,6 +270,13 @@
             var total = [];
 
             retrieveAllData();
+
+            // $("#check").click(function(e){
+            //    let a = $("#pocket").val();
+            //    let c = $("#amount").text();
+            //    let b = (parseInt(c)-parseInt)
+            //    $()
+            // })
 
             $("#createBtn").click(function (e) {
                 $("#form").show();
@@ -380,7 +449,7 @@
             var updateId;
             $(document).on("click", ".edit", function () {
                 status = false;
-               console.log(retrieveOneItem($(this).parent().parent().parent().attr("id"))) ;
+                console.log(retrieveOneItem($(this).parent().parent().parent().attr("id")));
                 updateId = $(this).parent().parent().parent().attr("id");
                 $("#updateForm").show();
                 $("#showTable").hide();
@@ -415,8 +484,8 @@
                     },
                     success: function (data) {
                         // console.log(data);
-                       var a =  $('#amount').text()
-                       alert(a);
+                        var a = $('#amount').text()
+                        alert(a);
 
                     },
                     error: function (e) {
@@ -452,4 +521,3 @@
 </body>
 
 </html>
-
