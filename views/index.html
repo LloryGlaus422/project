@@ -42,7 +42,7 @@
         margin-left: 80px;
         margin-top: 15%;
         padding: 4%;
-        background-color:  #b3d9ff;
+        background-color: #b3d9ff;
         border: 4px;
         width: 50%;
     }
@@ -72,21 +72,29 @@
         width: 60%;
         color: black;
     }
+
+    #price{
+        display:none
+    }
+
+
 </style>
 
 <body>
     <div id="header" class="card">
         <h2>Enrich your shopping list wisely.
-            </h2><br>
+        </h2><br>
         <button id="createBtn" type="button" class="btn btn-info btn-lg" data-toggle="modal"
             data-target="#myModal">Start</button>
     </div>
 
     <div id="form">
         <center>
-            
+
             <div class="card" id="showForm" style="display:none;width : 400px;">
-                    <center> <h3 class="card-header">Add New Item</h3></center>
+                <center>
+                    <h3 class="card-header">Add New Item</h3>
+                </center>
                 <div>
                     <form action="" class="form was-validated">
                         <div class="form-group">
@@ -142,14 +150,16 @@
                 <button id="updateCancel" class="btn btn-danger">CANCEL</button>
             </div>
         </div>
-        <div class="card" style="width: 18rem;margin-top: 2%;">
-                <img style = "width: 30px;height: 25%;margin-left:40%;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Total Amount:    <span id = "amount">0</span></h5>
-                  <p class="card-text"></p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
+        <div id="price" class="card" style="width: 18rem;margin-top: 2%;">
+            <img style="width: 30px;height: 25%;margin-left:40%;"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6hxqfdaUPUnm07z0lZ5EpZ97K5ZlQTYQg2_h91QsdQ-beCIwDkg&s"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Total Amount: <span id="amount">0</span></h5>
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
 
         <div class="container" style="display:inline;">
             <div id="showTable">
@@ -195,16 +205,20 @@
                 })
             }
 
+            var total = [];
+
             retrieveAllData();
 
             $("#createBtn").click(function (e) {
                 $("#form").show();
                 $('#header').hide();
+                $("#price").show();
             })
 
             $("#add").click(function (e) {
                 e.preventDefault();
                 $("#showForm").show();
+                $("#price").hide();
                 $("#showTable").hide();
             })
 
@@ -212,6 +226,7 @@
                 e.preventDefault();
                 $("#showForm").hide();
                 $("#showTable").show();
+                $("#price").show();
                 let item = $('input[name="item"]').val('');
                 let quantity = $('input[name="quantity"]').val('');
                 let price = $('input[name="price"]').val('');
@@ -222,24 +237,28 @@
                 e.preventDefault();
                 $("#updateForm").hide();
                 $("#showTable").show();
+                $("#price").show();
+
             })
 
-          
-            function addRow(data) {
-                
-                var tr = $("<tr>", {
-                    id: data._id,
-                    item: data.item,
-                    quantity: data.quantity,
-                    price: (data.price*data.quantity),
-                    priority: data.priority
 
-                });
+            function addRow(data) {
+
+                var tr = $("<tr>"
+                    , {
+                        id: data._id,
+                        item: data.item,
+                        quantity: data.quantity,
+                        price: (data.price * data.quantity),
+                        priority: data.priority
+
+                    }
+                );
                 var btns = $("<div>").append($("<button>", {
                     class: "btn btn-warning edit"
                 }).text("Edit"),
                     $("<button>", {
-                        class: "btn btn-secondary delete",
+                        class: "btn btn-secondary delete"
                     }).text("Delete")
                 )
 
@@ -247,19 +266,23 @@
                 $(tr).append(
                     $("<td>").text(data.item),
                     $("<td>").text(data.quantity),
-                    $("<td>").text(data.price*data.quantity),
+                    $("<td>", { id: "pid" }).text(data.price * data.quantity),
                     $("<td>").text(data.priority),
                     $("<td>").append(btns)
                 ).appendTo($('tbody'));
 
-                var a = $("#amount").text();
-                
-                $("#amount").text(parseFloat(a)+parseFloat(data.price*data.quantity))
-               
+                total.push(data.price * data.quantity)
+
+                var sum = 0;
+                for (var i in total) { sum += total[i]; }
+                var a = $("#amount").text(sum);
+
+
             }
 
 
             $("#addItem").on('click', function (e) {
+                $("#price").show();
                 e.preventDefault(e);
                 var boolean = true;
                 var item = $('input[name="item"]');
@@ -326,7 +349,12 @@
 
             $(document).on("click", ".delete", function () {
                 $(this).parent().parent().parent().fadeOut();
+
+                let deleteprice = $(this).parent().parent().parent().attr("price")
+                let current = $('#amount').text();
+                var sum = $("#amount").text(parseInt(current) - parseInt(deleteprice));
                 deleteItem($(this).parent().parent().parent().attr("id"));
+
             })
 
             function deleteItem(id) {
@@ -335,7 +363,6 @@
                     crossDomain: true,
                     type: "DELETE",
                     success: function (data) {
-                        console.log(data);
                         Swal.fire({
                             type: 'warning',
                             title: 'Warning!',
@@ -353,10 +380,12 @@
             var updateId;
             $(document).on("click", ".edit", function () {
                 status = false;
-                retrieveOneItem($(this).parent().parent().parent().attr("id"));
+               console.log(retrieveOneItem($(this).parent().parent().parent().attr("id"))) ;
                 updateId = $(this).parent().parent().parent().attr("id");
                 $("#updateForm").show();
                 $("#showTable").hide();
+                $("#price").hide();
+
 
             })
             $(document).on("click", "#updateItem", function () {
@@ -364,6 +393,8 @@
                 retrieveAllData();
                 $("#updateForm").hide();
                 $("#showTable").show();
+                $("#price").show();
+
             })
 
 
@@ -380,15 +411,16 @@
                         item: item.val(),
                         quantity: quantity.val(),
                         price: price.val(),
-                        priority: priority.val()
+                        priority: priority.val(),
                     },
                     success: function (data) {
-                        console.log(data);
+                        // console.log(data);
+                       var a =  $('#amount').text()
+                       alert(a);
+
                     },
                     error: function (e) {
                         console.log(e);
-                        $("#updateForm").show();
-                        $("#showTable").hide();
                         Swal.fire({
                             type: 'error',
                             title: 'Oops...',
@@ -420,3 +452,4 @@
 </body>
 
 </html>
+
